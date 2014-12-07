@@ -1,17 +1,3 @@
-        <div class="bs-example">
-    <div class="panel panel-default">
-      <!-- Default panel contents -->
-      <div class="panel-heading">What you get for a fiver on Groupon!</div>
-
-      <!-- Table -->
-      <table class="table">
-        <thead>
-          <tr>
-            <th>Deal Price</th>
-            <th>Title</th>
-          </tr>
-        </thead>
-        <tbody>
         <% 1.upto(20) do |pagenum|  %>
         <% url = "http://www.groupon.co.uk/browse/london?&page=#{pagenum}" %>
         <% data = Nokogiri::HTML(open(url)) %>
@@ -26,7 +12,3 @@
         <% end %>
         <% end %>
         </tr>
-    </tbody>
-</table>
-</div>
-</div>
