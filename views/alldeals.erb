@@ -1,0 +1,13 @@
+
+        <% url = "http://www.alldeals.co.uk/deals.html?order=price:a" %>
+        <% data = Nokogiri::HTML(open(url)) %>
+        <% restaurants = data.css('.activeDeals') %>
+        <% restaurants.each do |food| %>
+        <% discountprice = food.at_css('.clsDealPrice').text.split(" ")[0] %>
+        <% if discountprice.to_i <= 5.00  %>
+        <tr>
+        <td><%= discountprice %></td>
+        <td><a href="<%= food.at_css('a')[:href] %>"><%= food.at_css('.clsDealDirectLinks').text.strip.split("--")[0] %></a></td>
+        <% end %>
+        <% end %>
+        </tr>

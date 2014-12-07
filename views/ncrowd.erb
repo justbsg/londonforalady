@@ -1,0 +1,12 @@
+        <% url = "http://www.ncrowd.co.uk/london/deals?order=price&limit=99&direction=asc" %>
+        <% data = Nokogiri::HTML(open(url)) %>
+        <% restaurants = data.css('.s-deal') %>
+        <% restaurants.each do |food| %>
+        <% discountprice = food.at_css('.s-price').text.delete! '£' ','  %>
+        <% if discountprice.to_i <= 5.00  %>
+        <tr>
+        <td><%= discountprice %></td>
+        <td><a href="<%= food.at_css('a')[:href] %>"><%= food.at_css('.company-name').text %></a></td>
+        <% end %>
+        <% end %>
+        </tr>

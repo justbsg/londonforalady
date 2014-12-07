@@ -1,0 +1,32 @@
+        <div class="bs-example">
+    <div class="panel panel-default">
+      <!-- Default panel contents -->
+      <div class="panel-heading">What you get for a fiver on Groupon!</div>
+
+      <!-- Table -->
+      <table class="table">
+        <thead>
+          <tr>
+            <th>Deal Price</th>
+            <th>Title</th>
+          </tr>
+        </thead>
+        <tbody>
+        <% 1.upto(20) do |pagenum|  %>
+        <% url = "http://www.groupon.co.uk/browse/london?&page=#{pagenum}" %>
+        <% data = Nokogiri::HTML(open(url)) %>
+        <% @restaurants = data.css('.deal-card.deal-list-tile.deal-tile-standard') %>
+        <% @restaurants.each do |food|  %>
+        <% discountprice = food.at_css('.discount-price').text.delete! 'From £' ',' %>
+        <% if discountprice.to_i <= 5.00  %>
+        <tr>
+        <td>£<%= discountprice %></td>
+        <td><a href="<%= food.at_css('a')[:href]%>"><%= food.at_css('.deal-title.should-truncate').text %></a></td>
+        <% end %>
+        <% end %>
+        <% end %>
+        </tr>
+    </tbody>
+</table>
+</div>
+</div>
