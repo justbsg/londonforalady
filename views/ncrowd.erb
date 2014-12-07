@@ -5,7 +5,7 @@
         <% discountprice = food.at_css('.s-price').text.delete! '£' ','  %>
         <% if discountprice.to_i <= 5.00  %>
         <tr>
-        <td><%= discountprice %></td>
+        <td>£<%= discountprice %></td>
         <td><a href="<%= food.at_css('a')[:href] %>"><%= food.at_css('.company-name').text %></a></td>
         <% end %>
         <% end %>
